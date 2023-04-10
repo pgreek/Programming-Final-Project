@@ -9,12 +9,18 @@ public class MenuClickDetect : MonoBehaviour
         if (gameObject.tag == "PlayButton") //Load Main game scene
         {
             SceneManager.LoadScene("SampleScene");
-        } else if (gameObject.tag == "HowToPlayButton") //Load Tutorial Scene
+        }
+        else if (gameObject.tag == "HowToPlayButton") //Load Tutorial Scene
         {
             SceneManager.LoadScene("How To Play");
-        } else if (gameObject.tag == "StatsButton" ) // Load Stats Scene
+        }
+        else if (gameObject.tag == "StatsButton") // Load Stats Scene
         {
             SceneManager.LoadScene("Stats");
+        }
+        else if (gameObject.tag == "StatsBack")
+        {
+            SceneManager.LoadScene("Menu");
         }
     }
 }
