@@ -8,7 +8,7 @@ public class MenuClickDetect : MonoBehaviour
         Debug.Log("Menu Click");
         if (gameObject.tag == "PlayButton") //Load Main game scene
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("d6");
         }
         else if (gameObject.tag == "HowToPlayButton") //Load Tutorial Scene
         {
