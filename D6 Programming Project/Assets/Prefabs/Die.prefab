@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1694530954422688756}
   - component: {fileID: 7073736925729611812}
   - component: {fileID: 3726898406679329484}
+  - component: {fileID: 7585645212015903471}
   m_Layer: 0
   m_Name: Die
   m_TagString: Untagged
@@ -97,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fa5ee784b39144d8dfacfc246fbe98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceManager: {fileID: 0}
+  currentDiceSlot: {fileID: 0}
   dieSprite: {fileID: 7073736925729611812}
   basic:
   - serializedVersion: 2
@@ -111,3 +114,34 @@ MonoBehaviour:
     rgba: 4294751111
   - serializedVersion: 2
     rgba: 4287233159
+  DiceNumber: 0
+  DiceColor: 0
+  DicePlacement: 0
+  inCurrentSlot: 0
+  layerMask: 32
+--- !u!61 &7585645212015903471
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960226050435990459}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.0090091, y: 2.012012}
+    newSize: {x: 2.23, y: 2.2333333}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.0090091, y: 2.012012}
+  m_EdgeRadius: 0
