@@ -240,7 +240,10 @@ MonoBehaviour:
   CurrentColor: 0
   ChosenNumber: 0
   ChosenColor: 0
+  ChosenPlacement: 0
   moveOK: 0
+  slotOpen: 0
+  t: {fileID: 0}
 --- !u!4 &394964220
 Transform:
   m_ObjectHideFlags: 0

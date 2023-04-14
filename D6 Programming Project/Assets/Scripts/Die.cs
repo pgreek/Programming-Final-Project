@@ -16,8 +16,13 @@ public class Die : MonoBehaviour
 
     public bool inCurrentSlot = false;
     public int layerMask = 1 << 5; //bitshift for layer 5, will ignore sprites
-    
 
+    //Hoseung Kwack
+    public GameObject smallCirclePrefab; // circlePrefab
+    public float circleSize = 1f; // circleSize
+    public float circleSpeed = 5f; // circleSpeed
+    public int circleCount = 50;
+    //
     RaycastHit2D hit;
 
     public void Awake()
@@ -72,6 +77,29 @@ public class Die : MonoBehaviour
             diceManager.CurrentColor = -1;
             Destroy(transform.gameObject);
         }
+        for (int i = 0; i < circleCount; i++)
+        {
+            // createCircle
+            GameObject circle = Instantiate(smallCirclePrefab, transform.position, Quaternion.identity);
+
+            // randomSpeed
+            float speed = Random.Range(0.5f, 1.5f) * circleSpeed;
+
+            // Randomdirection
+            Vector2 direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+
+            // Move
+            circle.GetComponent<Rigidbody2D>().velocity = direction * speed;
+            circle.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
+
+            //color
+            SmallCircle smallCircle = circle.gameObject.AddComponent<SmallCircle>();
+            smallCircle.color = basic[DiceColor];
+            StartCoroutine(smallCircle.GettingSmaller(3f));
+
+            //
+        }
+        //
     }
 
     private void Update() //try and keep this as clean as possible, we don't want too much stuff running every frame for 11 different objects
