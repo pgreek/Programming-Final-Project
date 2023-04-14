@@ -8,7 +8,7 @@ public class TutorialClick : MonoBehaviour
 
     private void Start()
     {
-        spriteIndex = 0; //starts at 0
+        spriteIndex = 0; //starts at 0 - make it the health variable
         GetComponent<SpriteRenderer>().sprite = sprites[spriteIndex];
     }
 
