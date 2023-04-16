@@ -95,7 +95,7 @@ public class Die : MonoBehaviour
             //color
             SmallCircle smallCircle = circle.gameObject.AddComponent<SmallCircle>();
             smallCircle.color = basic[DiceColor];
-            StartCoroutine(smallCircle.GettingSmaller(3f));
+            StartCoroutine(smallCircle.GettingSmaller(2.5f));
 
             //
         }
