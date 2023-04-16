@@ -29,16 +29,27 @@ public class DiceManager : MonoBehaviour
 
     public Transform t;
 
+    public static int streak; //dice match streak
+    public static int totalscore;
+
     void Start()
     {
         CurrentNumber = -1; //default values for checking if space is free
         CurrentColor = -1;
+
+        streak = 0;
+        totalscore = 0;
 
         foreach (Transform t in Placements) //for every transform value in the array, run this code once (which spawns one dice per slot)
         {
             DiceGen(t);
         }
 
+    }
+
+    void Update()
+    {
+        Debug.Log(streak);
     }
 
     void DiceGen(Transform t2) //accepts a transform position
@@ -71,7 +82,8 @@ public class DiceManager : MonoBehaviour
 
                 Transform t = Placements[chosenDiceStats[2] - 5];
                 DiceGen(t);
-
+                streak++;
+                totalscore++;
             }
             else if (ChosenColor == CurrentColor)
             {
@@ -82,7 +94,7 @@ public class DiceManager : MonoBehaviour
 
                 Transform t = Placements[chosenDiceStats[2] - 5];
                 DiceGen(t);
-
+                streak++;
 
             }
             else if (ChosenNumber == 0 && CurrentNumber == 5)
@@ -94,7 +106,8 @@ public class DiceManager : MonoBehaviour
 
                 Transform t = Placements[chosenDiceStats[2] - 5];
                 DiceGen(t);
-
+                streak++;
+                totalscore++;
             }
             else //illegal move
             {
@@ -103,7 +116,8 @@ public class DiceManager : MonoBehaviour
         }
         else //space is free, put whatever dice was chosen in here
         {
-            
+            streak++;
+            totalscore++;
             CurrentNumber = ChosenNumber; //the chosen dice inherits the space
             CurrentColor = ChosenColor;
 

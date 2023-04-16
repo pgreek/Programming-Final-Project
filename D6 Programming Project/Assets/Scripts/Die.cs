@@ -72,6 +72,8 @@ public class Die : MonoBehaviour
         }
         else if(inCurrentSlot == true) //discard the dice from the stack by clicking on it
         {
+            HealthBar.Health--;
+            DiceManager.streak = 0;
             print("reached");
             diceManager.CurrentNumber = -1; //reset values to default
             diceManager.CurrentColor = -1;

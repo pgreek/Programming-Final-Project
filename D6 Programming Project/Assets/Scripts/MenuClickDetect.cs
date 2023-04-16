@@ -18,7 +18,7 @@ public class MenuClickDetect : MonoBehaviour
         {
             SceneManager.LoadScene("Stats");
         }
-        else if (gameObject.tag == "StatsBack")
+        else if (gameObject.tag == "StatsBack"||gameObject.tag == "GameOver") //Load Menu
         {
             SceneManager.LoadScene("Menu");
         }
