@@ -18,7 +18,8 @@ public class TotalScore : MonoBehaviour
     void Update()
     {
         Score.text = ("Total Score: " + (int)DiceManager.totalscore);
-
+        //forChecking
+        Debug.Log(Score);
     }
 
 

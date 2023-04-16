@@ -9,6 +9,7 @@ TagManager:
   - StatsButton
   - StatsBack
   - GameOver
+  - Die
   layers:
   - Default
   - TransparentFX

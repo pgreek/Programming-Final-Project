@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Die : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Die : MonoBehaviour
     public Transform currentDiceSlot; //slot where stacking happens
     public SpriteRenderer dieSprite;
     public Color32[] basic; //array list of 5 colors
+    public SmallCircle circleBool;
 
     [SerializeField] private int DiceNumber; //number and color for later reference
     [SerializeField] private int DiceColor;
@@ -27,24 +29,22 @@ public class Die : MonoBehaviour
 
     public void Awake()
     {
-         diceManager = FindObjectOfType<DiceManager>();
-         currentDiceSlot = GameObject.Find("CurrentDiceSlot").transform;
+        diceManager = FindObjectOfType<DiceManager>();
+        currentDiceSlot = GameObject.Find("CurrentDiceSlot").transform;
 
-         DiceNumber = diceManager.number;
-         DiceColor = diceManager.color;
-         DicePlacement = diceManager.CurrentPlacement;
+        DiceNumber = diceManager.number;
+        DiceColor = diceManager.color;
+        DicePlacement = diceManager.CurrentPlacement;
 
-         dieSprite.color = basic[DiceColor]; //the color of the dice
+        dieSprite.color = basic[DiceColor]; //the color of the dice
 
-        
+
     }
 
     public void OnMouseDown()
     {
-
         if (DicePlacement >= 5 && inCurrentSlot == false) //if the dice is on the bottom row and not in the stack
         {
-
             int[] temp = new int[3]; //array to send data to diceManager
 
             temp[0] = DiceNumber;
@@ -53,11 +53,11 @@ public class Die : MonoBehaviour
 
             diceManager.SendMessage("DiceCheck", temp); //send dice stats to method within diceManager to check if the move is valid
 
-            
+
             if (diceManager.moveOK) //if diceManager has given the OK to move
             {
                 transform.position = currentDiceSlot.position; //move dice to the stack
-                hit = Physics2D.Raycast(transform.position, Vector2.zero, Mathf.Infinity, 5); 
+                hit = Physics2D.Raycast(transform.position, Vector2.zero, Mathf.Infinity, 5);
 
                 if (hit != false) //the raycast hit an object
                 {
@@ -68,9 +68,9 @@ public class Die : MonoBehaviour
                 inCurrentSlot = true; //dice now occupies current slot
             }
 
-            diceManager.moveOK = false; 
+            diceManager.moveOK = false;
         }
-        else if(inCurrentSlot == true) //discard the dice from the stack by clicking on it
+        else if (inCurrentSlot == true) //discard the dice from the stack by clicking on it
         {
             HealthBar.Health--;
             DiceManager.streak = 0;
@@ -79,29 +79,40 @@ public class Die : MonoBehaviour
             diceManager.CurrentColor = -1;
             Destroy(transform.gameObject);
         }
-        for (int i = 0; i < circleCount; i++)
+        if (inCurrentSlot == true && HealthBar.Health <= 0)
         {
-            // createCircle
-            GameObject circle = Instantiate(smallCirclePrefab, transform.position, Quaternion.identity);
-
-            // randomSpeed
-            float speed = Random.Range(0.5f, 1.5f) * circleSpeed;
-
-            // Randomdirection
-            Vector2 direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-
-            // Move
-            circle.GetComponent<Rigidbody2D>().velocity = direction * speed;
-            circle.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
-
-            //color
-            SmallCircle smallCircle = circle.gameObject.AddComponent<SmallCircle>();
-            smallCircle.color = basic[DiceColor];
-            StartCoroutine(smallCircle.GettingSmaller(2.5f));
-
-            //
+            for (int i = 0; i < circleCount; i++)
+            {
+                StartCoroutine(CreateParticle());
+            }
         }
-        //
+    }
+    IEnumerator CreateParticle() // coroutine to create particles
+    {
+
+        // createCircle
+        GameObject circle = Instantiate(smallCirclePrefab, transform.position, Quaternion.identity);
+
+        // randomSpeed
+        float speed = Random.Range(0.5f, 1.5f) * circleSpeed;
+
+        // Randomdirection
+        Vector2 direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+
+        // Move
+        circle.GetComponent<Rigidbody2D>().velocity = direction * speed;
+        circle.transform.localScale = new Vector3(0.3f, 0.3f, 1f);
+
+        //color
+        SmallCircle smallCircle = circle.gameObject.AddComponent<SmallCircle>();
+        smallCircle.color = basic[DiceColor];
+        StartCoroutine(smallCircle.GettingSmaller(2.5f));
+
+        yield return new WaitForSeconds(0.05f); //wait for a moment before creating the next circle
+
+        // wait until all the particles are gone
+        yield return new WaitForSeconds(3f);
+
     }
 
     private void Update() //try and keep this as clean as possible, we don't want too much stuff running every frame for 11 different objects
@@ -112,5 +123,9 @@ public class Die : MonoBehaviour
             DicePlacement = DicePlacement + 5;
             diceManager.slotOpen = false;
         }
+    }
+    private void LoadGameOverScene()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 }

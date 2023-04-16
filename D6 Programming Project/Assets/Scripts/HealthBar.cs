@@ -22,11 +22,12 @@ public class HealthBar : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().sprite = sprites[Health];
     }
-    if (Health <= 0)
-    {
-        SceneManager.LoadScene("GameOver");
+    //going to work in Die script
+    //if (Health <= 0)
+    //{
+       // SceneManager.LoadScene("GameOver");
+    //}
     }
-}
 
-    }
+}
 
