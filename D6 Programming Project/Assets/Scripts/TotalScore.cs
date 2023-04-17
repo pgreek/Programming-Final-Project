@@ -7,6 +7,7 @@ public class TotalScore : MonoBehaviour
 {
 
     public TextMeshProUGUI Score;
+    public TextMeshProUGUI bestStreak;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class TotalScore : MonoBehaviour
     void Update()
     {
         Score.text = ("Total Score: " + (int)DiceManager.totalscore);
+        bestStreak.text = ("Highest Streak: " + (int)DiceManager.highestStreak);
         //forChecking
         Debug.Log(Score);
     }

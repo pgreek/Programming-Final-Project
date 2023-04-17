@@ -30,6 +30,7 @@ public class DiceManager : MonoBehaviour
     public Transform t;
 
     public static int streak; //dice match streak
+    public static int highestStreak = 0;
     public static int totalscore;
 
     void Start()
@@ -95,6 +96,7 @@ public class DiceManager : MonoBehaviour
                 Transform t = Placements[chosenDiceStats[2] - 5];
                 DiceGen(t);
                 streak++;
+                totalscore++;
 
             }
             else if (ChosenNumber == 0 && CurrentNumber == 5)
@@ -127,5 +129,11 @@ public class DiceManager : MonoBehaviour
             Transform t = Placements[chosenDiceStats[2] - 5];
             DiceGen(t);
         } 
+
+        if (streak > highestStreak) //keep track of the highest streak
+        {
+            highestStreak = streak;
+        }
+
     }
 }
