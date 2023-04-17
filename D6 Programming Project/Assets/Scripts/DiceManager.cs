@@ -50,7 +50,7 @@ public class DiceManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(streak);
+        //Debug.Log(streak);
     }
 
     void DiceGen(Transform t2) //accepts a transform position

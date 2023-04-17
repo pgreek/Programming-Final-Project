@@ -74,7 +74,7 @@ public class Die : MonoBehaviour
         {
             HealthBar.Health--;
             DiceManager.streak = 0;
-            print("reached");
+            //print("reached");
             diceManager.CurrentNumber = -1; //reset values to default
             diceManager.CurrentColor = -1;
             Destroy(transform.gameObject);

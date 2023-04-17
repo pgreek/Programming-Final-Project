@@ -21,7 +21,7 @@ public class TotalScore : MonoBehaviour
         Score.text = ("Total Score: " + (int)DiceManager.totalscore);
         bestStreak.text = ("Highest Streak: " + (int)DiceManager.highestStreak);
         //forChecking
-        Debug.Log(Score);
+        //Debug.Log(Score);
     }
 
 

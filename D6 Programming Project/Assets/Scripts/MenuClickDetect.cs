@@ -5,7 +5,7 @@ public class MenuClickDetect : MonoBehaviour
 {
     void OnMouseDown() //Detects when button is clicked and loads corresponding scene.
     {
-        Debug.Log("Menu Click");
+        //Debug.Log("Menu Click");
         if (gameObject.tag == "PlayButton") //Load Main game scene
         {
             SceneManager.LoadScene("d6");
